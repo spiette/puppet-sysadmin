@@ -30,6 +30,7 @@ describe 'sysadmin' do
     ]
     describe "sysadmin class on #{osfamily}" do
       let(:facts) { { :osfamily => osfamily } }
+      it { should contain_class('sysadmin') }
       packages.each do |package|
         it { should contain_package(package).with_ensure('present') }
       end
@@ -37,6 +38,7 @@ describe 'sysadmin' do
     describe "sysadmin class ensure => absent on #{osfamily}" do
       let(:params) { { :ensure          => 'absent' } }
       let(:facts) { { :osfamily => osfamily } }
+      it { should contain_class('sysadmin') }
       packages.each do |package|
         it { should contain_package(package).with_ensure('absent') }
       end
