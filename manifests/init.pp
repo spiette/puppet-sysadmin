@@ -23,6 +23,7 @@
 # Copyright 2013 Simon Piette
 #
 class sysadmin ($ensure=present) {
+  include sysadmin::params
   package { [
     'curl',
     'dstat',
@@ -30,11 +31,12 @@ class sysadmin ($ensure=present) {
     'iotop',
     'iperf',
     'iptraf',
-    'mtr',
+    $sysadmin::params::mtr,
     'screen',
     'sysstat',
     'traceroute',
-    'vim-enhanced',
+    $sysadmin::params::vim,
+    'wget',
   ]:
     ensure => $ensure,
   }
