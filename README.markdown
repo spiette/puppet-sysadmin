@@ -23,3 +23,6 @@ Simon Piette <piette.simon@gmail.com>
 # Support
 
 Please log tickets and issues at our [Projects site](https://github.com/spiette/puppet-sysadmin)
+
+# TODO
+Fedora support
