@@ -1,5 +1,5 @@
 name    'spiette-sysadmin'
-version '0.0.1'
+version '0.1.0'
 source 'http://github.com/spiette/puppet-sysadmin'
 author 'Simon Piette <simon.piette@savoirfairelinux.com>'
 license 'Apache License, Version 2.0'
