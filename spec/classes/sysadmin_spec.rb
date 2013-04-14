@@ -18,6 +18,7 @@ describe 'sysadmin' do
       'curl',
       'dstat',
       'ethtool',
+      'gawk',
       'iotop',
       'iperf',
       'iptraf',
@@ -36,7 +37,7 @@ describe 'sysadmin' do
       end
     end
     describe "sysadmin class ensure => absent on #{osfamily}" do
-      let(:params) { { :ensure          => 'absent' } }
+      let(:params) { { :ensure => 'absent' } }
       let(:facts) { { :osfamily => osfamily } }
       it { should contain_class('sysadmin') }
       packages.each do |package|

@@ -14,7 +14,7 @@
 #    ensure => latest
 #  }
 #
-# === Authors
+# === Author
 #
 # Simon Piette <simon.piette@savoirfairelinux.com>
 #
@@ -28,6 +28,7 @@ class sysadmin ($ensure=present) {
     'curl',
     'dstat',
     'ethtool',
+    'gawk',
     'iotop',
     'iperf',
     'iptraf',
