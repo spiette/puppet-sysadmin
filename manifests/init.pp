@@ -29,6 +29,7 @@ class sysadmin ($ensure=present) {
     'dstat',
     'ethtool',
     'iotop',
+    'iftop',
     'iperf',
     'iptraf',
     $sysadmin::params::mtr,
