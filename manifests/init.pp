@@ -25,6 +25,7 @@
 class sysadmin ($ensure=present) {
   include sysadmin::params
   package { [
+    'acpid',
     'curl',
     'dstat',
     'ethtool',
