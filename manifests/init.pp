@@ -25,11 +25,13 @@
 class sysadmin ($ensure=present) {
   include sysadmin::params
   package { [
+    'acpid',
     'curl',
     'dstat',
     'ethtool',
     'gawk',
     'iotop',
+    'iftop',
     'iperf',
     'iptraf',
     $sysadmin::params::mtr,

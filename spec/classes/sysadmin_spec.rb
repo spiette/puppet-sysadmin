@@ -15,6 +15,7 @@ describe 'sysadmin' do
         vim = 'vim'
     end
     packages = [
+      'acpid',
       'curl',
       'dstat',
       'ethtool',
