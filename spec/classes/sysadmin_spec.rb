@@ -16,6 +16,7 @@ describe 'sysadmin' do
     end
     packages = [
       'acpid',
+      'blktrace',
       'curl',
       'dstat',
       'ethtool',
