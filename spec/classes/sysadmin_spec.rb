@@ -46,6 +46,15 @@ describe 'sysadmin' do
         it { should contain_package(package).with_ensure('absent') }
       end
     end
+    if osfamily == 'RedHat'
+      describe "sysadmin class in Fedora" do
+        let(:facts) { {
+          :osfamily => osfamily,
+          :operatingsystem => 'Fedora'
+        } }
+        it { should contain_package('iptraf-ng').with_ensure('present') }
+      end
+    end
   end
 end
 

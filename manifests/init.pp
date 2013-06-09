@@ -34,7 +34,7 @@ class sysadmin ($ensure=present) {
     'iotop',
     'iftop',
     'iperf',
-    'iptraf',
+    $sysadmin::params::iptraf,
     $sysadmin::params::mtr,
     'screen',
     'sysstat',
