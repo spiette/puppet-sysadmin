@@ -1,7 +1,7 @@
 # sysadmin
 [![Build Status](https://travis-ci.org/spiette/puppet-sysadmin.png)](https://travis-ci.org/spiette/puppet-sysadmin)
 
-This is the sysadmin module. It installs packages for system administration.
+This is the sysadmin module. It installs packages for system administration that won't 
 
 * acpid
 * blktrace
@@ -14,9 +14,27 @@ This is the sysadmin module. It installs packages for system administration.
 * iperf
 * mtr
 * screen
-* sysstat
+* sysstat (can be disabled)
 * traceroute
+* vim (optionnaly)
 * wget
+
+### Parameters
+
+- *ensure*
+  (present|latest|absent)
+  This parameter will be passed to package.
+
+- *vim*
+  Most of the time, you'll want a more refined vim module to handle
+  configuration and plugins. But if you want a simple vim setup, just set this
+  to true. It defaults to false.
+
+- *sysstat*
+  Sysstat is a package that you may want to tweak and let it have its own
+  module. If this is the case and you want to handle the package installation
+  elsewhere, set this to false and the sysadmin module won't install sysstat.
+  It defaults to true.
 
 # License
 Apache License 2.0

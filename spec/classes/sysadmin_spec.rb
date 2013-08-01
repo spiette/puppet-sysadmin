@@ -21,33 +21,59 @@ describe 'sysadmin' do
       'dstat',
       'ethtool',
       'gawk',
+      'iftop',
       'iotop',
       'iperf',
       'iptraf',
       mtr,
       'screen',
-      'sysstat',
       'traceroute',
       vim,
       'wget',
     ]
-    describe "sysadmin class on #{osfamily}" do
+    describe "class on #{osfamily}" do
       let(:facts) { { :osfamily => osfamily } }
       it { should contain_class('sysadmin') }
       packages.each do |package|
+        next if package == vim
         it { should contain_package(package).with_ensure('present') }
       end
     end
-    describe "sysadmin class ensure => absent on #{osfamily}" do
+    describe "class w/o vim on #{osfamily}" do
+      let(:params) { { :vim => false } }
+      let(:facts) { { :osfamily => osfamily } }
+      it { should contain_class('sysadmin') }
+      it { should_not contain_package(vim) }
+    end
+    describe "class with vim on #{osfamily}" do
+      let(:params) { { :vim => true } }
+      let(:facts) { { :osfamily => osfamily } }
+      it { should contain_class('sysadmin') }
+      it { should contain_package(vim) }
+    end
+    describe "class on #{osfamily} with sysstat" do
+      let(:params) { { :sysstat => false } }
+      let(:facts) { { :osfamily => osfamily } }
+      it { should contain_class('sysadmin') }
+      it { should_not contain_package('sysstat') }
+    end
+    describe "class on #{osfamily} w/o sysstat" do
+      let(:params) { { :sysstat => false } }
+      let(:facts) { { :osfamily => osfamily } }
+      it { should contain_class('sysadmin') }
+      it { should_not contain_package('sysstat') }
+    end
+    describe "class ensure => absent on #{osfamily}" do
       let(:params) { { :ensure => 'absent' } }
       let(:facts) { { :osfamily => osfamily } }
       it { should contain_class('sysadmin') }
       packages.each do |package|
+        next if package == vim
         it { should contain_package(package).with_ensure('absent') }
       end
     end
     if osfamily == 'RedHat'
-      describe "sysadmin class in Fedora" do
+      describe "class in Fedora" do
         let(:facts) { {
           :osfamily => osfamily,
           :operatingsystem => 'Fedora'
