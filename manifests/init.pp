@@ -11,8 +11,8 @@
 #
 # [*vim*]
 # Most of the time, you'll want a more refined vim module to handle
-# configuration and plugins. But if you want a simple vim setup, just set this
-# to true. It defaults to false.
+# configuration and plugins. But if you just want the vim package, just set
+# this to true. It defaults to false.
 #
 # [*sysstat*]
 # Sysstat is a package that you may want to tweak and let it have its own
