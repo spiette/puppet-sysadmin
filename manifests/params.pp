@@ -6,19 +6,30 @@ class sysadmin::params {
       $mtr = 'mtr-tiny'
       $vim = 'vim'
       $iptraf = 'iptraf'
+      $iperf = 'iperf'
     }
     'RedHat': {
       $mtr = 'mtr'
       $vim = 'vim-enhanced'
-      $iptraf = $::operatingsystem  ? {
-        'Fedora' => 'iptraf-ng',
-        default  => 'iptraf',
+      if (
+        ($::operatingsystem == 'Fedora'
+        or
+        $::operatingsystemmajrelease > 6)
+        or
+        ( $::operatingsystem == 'Amazon' and $::operatingsystemmajrelease > 3 )
+      ) {
+        $iptraf = 'iptraf-ng'
+        $iperf = 'iperf3'
+      } else {
+        $iptraf = 'iptraf'
+        $iperf = 'iperf'
       }
     }
     default: {
       $mtr = 'mtr-tiny'
       $vim = 'vim'
       $iptraf = 'iptraf'
+      $iperf = 'iperf'
     }
   }
 }
