@@ -44,7 +44,10 @@ describe 'sysadmin' do
       'wget',
     ]
     describe "class on #{osfamily}" do
-      let(:facts) { { :osfamily => osfamily } }
+      let(:facts) { {
+        :osfamily => osfamily,
+        :operatingsystemrelease => operatingsystemrelease
+      } }
       it { should contain_class('sysadmin') }
       packages.each do |package|
         next if package == vim
@@ -53,31 +56,46 @@ describe 'sysadmin' do
     end
     describe "class w/o vim on #{osfamily}" do
       let(:params) { { :vim => false } }
-      let(:facts) { { :osfamily => osfamily } }
+      let(:facts) { {
+        :osfamily => osfamily,
+        :operatingsystemrelease => operatingsystemrelease
+      } }
       it { should contain_class('sysadmin') }
       it { should_not contain_package(vim) }
     end
     describe "class with vim on #{osfamily}" do
       let(:params) { { :vim => true } }
-      let(:facts) { { :osfamily => osfamily } }
+      let(:facts) { {
+        :osfamily => osfamily,
+        :operatingsystemrelease => operatingsystemrelease
+      } }
       it { should contain_class('sysadmin') }
       it { should contain_package(vim) }
     end
     describe "class on #{osfamily} with sysstat" do
       let(:params) { { :sysstat => false } }
-      let(:facts) { { :osfamily => osfamily } }
+      let(:facts) { {
+        :osfamily => osfamily,
+        :operatingsystemrelease => operatingsystemrelease
+      } }
       it { should contain_class('sysadmin') }
       it { should_not contain_package('sysstat') }
     end
     describe "class on #{osfamily} w/o sysstat" do
       let(:params) { { :sysstat => false } }
-      let(:facts) { { :osfamily => osfamily } }
+      let(:facts) { {
+        :osfamily => osfamily,
+        :operatingsystemrelease => operatingsystemrelease
+      } }
       it { should contain_class('sysadmin') }
       it { should_not contain_package('sysstat') }
     end
     describe "class ensure => absent on #{osfamily}" do
       let(:params) { { :ensure => 'absent' } }
-      let(:facts) { { :osfamily => osfamily } }
+      let(:facts) { {
+        :osfamily => osfamily,
+        :operatingsystemrelease => operatingsystemrelease
+      } }
       it { should contain_class('sysadmin') }
       packages.each do |package|
         next if package == vim
@@ -88,14 +106,16 @@ describe 'sysadmin' do
       describe "class in Fedora" do
         let(:facts) { {
           :osfamily => osfamily,
-          :operatingsystem => 'Fedora'
+          :operatingsystem => 'Fedora',
+          :operatingsystemrelease => '20'
         } }
         it { should contain_package('iptraf-ng').with_ensure('present') }
       end
       describe "class in EL7" do
         let(:facts) { {
           :osfamily => osfamily,
-          :operatingsystem => 'RedHat'
+          :operatingsystem => 'RedHat',
+          :operatingsystemrelease => operatingsystemrelease
         } }
         it { should contain_package('iptraf-ng').with_ensure('present') }
       end
