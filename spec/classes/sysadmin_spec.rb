@@ -5,14 +5,26 @@ describe 'sysadmin' do
   ['Debian','RedHat'].each do |osfamily|
     case osfamily
     when 'Debian'
-        mtr = 'mtr-tiny'
-        vim = 'vim'
+      mtr = 'mtr-tiny'
+      vim = 'vim'
+      iperf = 'iperf'
+      iptraf = 'iptraf'
     when 'RedHat'
-        mtr = 'mtr'
-        vim = 'vim-enhanced'
+      operatingsystemrelease = 7
+      mtr = 'mtr'
+      vim = 'vim-enhanced'
+      if ( operatingsystemrelease > 6 )
+        iperf = 'iperf3'
+        iptraf = 'iptraf-ng'
+      else
+        iptraf = 'iptraf'
+        iperf = 'iperf'
+      end
     else
-        mtr = 'mtr'
-        vim = 'vim'
+      mtr = 'mtr'
+      vim = 'vim'
+      iperf = 'iperf'
+      iptraf = 'iptraf'
     end
     packages = [
       'acpid',
@@ -23,8 +35,8 @@ describe 'sysadmin' do
       'gawk',
       'iftop',
       'iotop',
-      'iperf',
-      'iptraf',
+      iperf,
+      iptraf,
       mtr,
       'screen',
       'traceroute',
@@ -77,6 +89,13 @@ describe 'sysadmin' do
         let(:facts) { {
           :osfamily => osfamily,
           :operatingsystem => 'Fedora'
+        } }
+        it { should contain_package('iptraf-ng').with_ensure('present') }
+      end
+      describe "class in EL7" do
+        let(:facts) { {
+          :osfamily => osfamily,
+          :operatingsystem => 'RedHat'
         } }
         it { should contain_package('iptraf-ng').with_ensure('present') }
       end
